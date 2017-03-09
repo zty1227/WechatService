@@ -12,4 +12,9 @@ public interface WbDataService {
     public void save(WeiboData weiboData)throws Exception;
 
     public List<WeiboData> findAll()throws Exception;
+
+    public WeiboData findByContentId(String contentId) throws Exception;
+
+    public void updateByContentId(WeiboData weiboData) throws Exception;
+
 }

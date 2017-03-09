@@ -32,4 +32,7 @@ public interface WeiboDataMapper {
     int updateByPrimaryKey(WeiboData record);
 
     List<WeiboData> findAll();
+
+    WeiboData findByContentId(String contentId);
+
 }

@@ -114,4 +114,14 @@ public class Databasetest {
             System.out.println(weiboDataList.get(i).toString());
         }
     }
+
+    @Test
+    public void findByContentId() throws Exception {
+        String bi = "M_ExDrcCwRj";
+        WeiboData test = wbDataService.findByContentId(bi);
+        if (bi.equals(test.getContentid())) {
+            System.out.println("1");
+        }
+        System.out.println(test.toString());
+    }
 }

@@ -196,4 +196,7 @@
     <select id="findAll" parameterType="com.jackson.entity.WeiboData" resultType="com.jackson.entity.WeiboData">
         SELECT * FROM WeiboData
     </select>
+    <select id="findByContentId" parameterType="java.lang.String" resultType="com.jackson.entity.WeiboData">
+        SELECT * FROM WeiboData WHERE contentId = #{contentId}
+    </select>
 </mapper>

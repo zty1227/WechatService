@@ -16,6 +16,7 @@ import java.util.List;
 @Component
 public class WeiboFriendsPipeline implements Pipeline {
 
+    public static int size = 0;
 
     @Autowired
     protected WbDataService wbDataService;
@@ -26,7 +27,16 @@ public class WeiboFriendsPipeline implements Pipeline {
         List<WeiboData> weiboDataList = resultItems.get("weiboDataList");
         for(int i=0;i<weiboDataList.size();i++){
             try {
-                wbDataService.save(weiboDataList.get(i));
+                if (wbDataService.findByContentId(weiboDataList.get(i).getContentid()) != null) {
+                    wbDataService.updateByContentId(weiboDataList.get(i));
+                } else {
+//                    System.out.println("save");
+
+                    wbDataService.save(weiboDataList.get(i));
+                    size++;
+
+                    System.out.println(size);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
