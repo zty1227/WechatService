@@ -35,15 +35,6 @@ public class WxUserInfoController extends GenericController {
         return mv;
     }
 
-    @RequestMapping(value = "aleadyZone")
-    public ModelAndView aleadyZone() throws Exception {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("aleadyZone");
-        List<WeixinUserInfo> aleadyZoneUser = null;
-        aleadyZoneUser = userInfoService.findUserByIsZone(true);
-        mv.addObject("userInfo",aleadyZoneUser);
-        return mv;
-    }
 
 
     @RequestMapping(value = "notZone")
@@ -69,11 +60,25 @@ public class WxUserInfoController extends GenericController {
         return "ok";
     }
 
+    @RequestMapping(value = "aleadyZone")
+    public ModelAndView aleadyZone() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("aleadyZone");
+        List<WeixinUserInfo> aleadyZoneUser = null;
+        aleadyZoneUser = userInfoService.findUserByIsZone(true);
+        mv.addObject("userInfo", aleadyZoneUser);
+        return mv;
+    }
+
     @RequestMapping(value = "aleadyZoneReact")
     public @ResponseBody List<WeixinUserInfo> aleadyZoneReact(@RequestBody HashMap<String,Object>map)throws Exception{
         String area = map.get("area").toString();
         List<WeixinUserInfo> aleadyZoneArea = null;
-        aleadyZoneArea = userInfoService.findByArea(area);
+        if ("all".equals(area)) {
+            aleadyZoneArea = userInfoService.findUserByIsZone(true);
+        } else {
+            aleadyZoneArea = userInfoService.findByArea(area);
+        }
         return aleadyZoneArea;
     }
 }

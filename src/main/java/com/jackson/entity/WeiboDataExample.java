@@ -383,6 +383,76 @@ public class WeiboDataExample {
             addCriterion("weiboName not between", value1, value2, "weiboname");
             return (Criteria) this;
         }
+
+        public Criteria andZoneIsNull() {
+            addCriterion("zone is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneIsNotNull() {
+            addCriterion("zone is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneEqualTo(String value) {
+            addCriterion("zone =", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneNotEqualTo(String value) {
+            addCriterion("zone <>", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneGreaterThan(String value) {
+            addCriterion("zone >", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneGreaterThanOrEqualTo(String value) {
+            addCriterion("zone >=", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneLessThan(String value) {
+            addCriterion("zone <", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneLessThanOrEqualTo(String value) {
+            addCriterion("zone <=", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneLike(String value) {
+            addCriterion("zone like", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneNotLike(String value) {
+            addCriterion("zone not like", value, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneIn(List<String> values) {
+            addCriterion("zone in", values, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneNotIn(List<String> values) {
+            addCriterion("zone not in", values, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneBetween(String value1, String value2) {
+            addCriterion("zone between", value1, value2, "zone");
+            return (Criteria) this;
+        }
+
+        public Criteria andZoneNotBetween(String value1, String value2) {
+            addCriterion("zone not between", value1, value2, "zone");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

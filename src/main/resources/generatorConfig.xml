@@ -56,7 +56,7 @@
         <!--<table schema="" tableName="WeixinMedia" domainObjectName="WeixinMedia" />-->
         <!--<table schema="" tableName="WeixinOauth2Token" domainObjectName="WeixinOauth2Token" />-->
         <!--<table schema="" tableName="ShareElement" domainObjectName="ShareElement" />-->
-        <!--<table schema="" tableName="WeiboData" domainObjectName="WeiboData" />-->
-        <table schema="" tableName="Proxyip" domainObjectName="Proxyip" />
+        <table schema="" tableName="WeiboData" domainObjectName="WeiboData"/>
+        <!--<table schema="" tableName="Proxyip" domainObjectName="Proxyip" />-->
     </context>
 </generatorConfiguration>

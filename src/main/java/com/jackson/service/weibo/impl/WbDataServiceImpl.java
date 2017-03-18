@@ -44,5 +44,10 @@ public class WbDataServiceImpl implements WbDataService {
         mapper.updateByExample(weiboData, weiboDataExample);
     }
 
+    @Override
+    public List<WeiboData> findByZone(String zone) throws Exception {
+        return this.mapper.findByZone(zone);
+    }
+
 
 }

@@ -102,12 +102,12 @@
                                                 class="fa fa-angle-up text-active"></i> </span> <span>旅游-预警</span> </a>
                                         <ul class="nav lt">
                                             <li>
-                                                <a href="weibo.jsp"> <i class="fa fa-angle-right"></i> <span>微博信息</span>
+                                                <a href="spider"> <i class="fa fa-angle-right"></i> <span>微博爬虫</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="icons.html"> <b class="badge bg-info pull-right">369</b> <i
-                                                        class="fa fa-angle-right"></i> <span>Icons</span> </a>
+                                                <a href="weibo"> <i class="fa fa-angle-right"></i> <span>微博信息</span>
+                                                </a>
                                             </li>
 
                                         </ul>
@@ -118,8 +118,8 @@
                                                 class="fa fa-angle-up text-active"></i> </span> <span>模板消息</span> </a>
                                         <ul class="nav lt">
                                             <li>
-                                                <a href="gallery.html"> <i class="fa fa-angle-right"></i>
-                                                    <span>Gallery</span> </a>
+                                                <a href="weiboTemp"> <i class="fa fa-angle-right"></i>
+                                                    <span>模板审核</span> </a>
                                             </li>
 
                                         </ul>

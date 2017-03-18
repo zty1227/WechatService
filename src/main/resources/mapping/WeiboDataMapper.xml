@@ -6,6 +6,7 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="imgUrl" jdbcType="VARCHAR" property="imgurl" />
     <result column="weiboName" jdbcType="VARCHAR" property="weiboname" />
+      <result column="zone" jdbcType="VARCHAR" property="zone"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    contentId, content, imgUrl, weiboName
+      contentId, content, imgUrl, weiboName, zone
   </sql>
   <select id="selectByExample" parameterType="com.jackson.entity.WeiboDataExample" resultMap="BaseResultMap">
     select
@@ -99,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jackson.entity.WeiboData">
-    insert into WeiboData (contentId, content, imgUrl, 
-      weiboName)
-    values (#{contentid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, 
-      #{weiboname,jdbcType=VARCHAR})
+    insert into WeiboData (contentId, content, imgUrl,
+      weiboName, zone)
+    values (#{contentid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR},
+      #{weiboname,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jackson.entity.WeiboData">
     insert into WeiboData
@@ -119,6 +120,9 @@
       <if test="weiboname != null">
         weiboName,
       </if>
+        <if test="zone != null">
+            zone,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="contentid != null">
@@ -133,6 +137,9 @@
       <if test="weiboname != null">
         #{weiboname,jdbcType=VARCHAR},
       </if>
+        <if test="zone != null">
+            #{zone,jdbcType=VARCHAR},
+        </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.jackson.entity.WeiboDataExample" resultType="java.lang.Long">
@@ -156,6 +163,9 @@
       <if test="record.weiboname != null">
         weiboName = #{record.weiboname,jdbcType=VARCHAR},
       </if>
+        <if test="record.zone != null">
+            zone = #{record.zone,jdbcType=VARCHAR},
+        </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set contentId = #{record.contentid,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       imgUrl = #{record.imgurl,jdbcType=VARCHAR},
-      weiboName = #{record.weiboname,jdbcType=VARCHAR}
+      weiboName = #{record.weiboname,jdbcType=VARCHAR},
+      zone = #{record.zone,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="weiboname != null">
         weiboName = #{weiboname,jdbcType=VARCHAR},
       </if>
+        <if test="zone != null">
+            zone = #{zone,jdbcType=VARCHAR},
+        </if>
     </set>
     where contentId = #{contentid,jdbcType=VARCHAR}
   </update>
@@ -190,7 +204,8 @@
     update WeiboData
     set content = #{content,jdbcType=VARCHAR},
       imgUrl = #{imgurl,jdbcType=VARCHAR},
-      weiboName = #{weiboname,jdbcType=VARCHAR}
+      weiboName = #{weiboname,jdbcType=VARCHAR},
+      zone = #{zone,jdbcType=VARCHAR}
     where contentId = #{contentid,jdbcType=VARCHAR}
   </update>
     <select id="findAll" parameterType="com.jackson.entity.WeiboData" resultType="com.jackson.entity.WeiboData">
@@ -198,5 +213,8 @@
     </select>
     <select id="findByContentId" parameterType="java.lang.String" resultType="com.jackson.entity.WeiboData">
         SELECT * FROM WeiboData WHERE contentId = #{contentId}
+    </select>
+    <select id="findByZone" parameterType="java.lang.String" resultType="com.jackson.entity.WeiboData">
+        SELECT * FROM WeiboData WHERE zone= #{zone}
     </select>
 </mapper>

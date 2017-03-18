@@ -33,6 +33,7 @@ public interface WeiboDataMapper {
 
     List<WeiboData> findAll();
 
-    WeiboData findByContentId(String contentId);
+    WeiboData findByContentId(String contentid);
 
+    List<WeiboData> findByZone(String zone);
 }

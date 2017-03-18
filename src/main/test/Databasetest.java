@@ -124,4 +124,14 @@ public class Databasetest {
         }
         System.out.println(test.toString());
     }
+
+
+    @Test
+    public void findByZone() throws Exception {
+        String zone = "湖北";
+        List<WeiboData> weiboDataList = wbDataService.findByZone(zone);
+        for (int i = 0; i < weiboDataList.size(); i++) {
+            System.out.println(weiboDataList.get(i).toString());
+        }
+    }
 }

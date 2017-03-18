@@ -30,77 +30,75 @@
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/jquery-3.1.1.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             var baseUrl = $("#baseUrl").attr("href");
             console.log(baseUrl);
-            $("#apply").click(function() {
+            $("#apply").click(function () {
                 var selectArea = $("#selectArea").val();
-                if (selectArea != "all") {
-                    var data =JSON.stringify({
-                            area:selectArea
-                    });
-                    console.log(data);
-                    $.ajax({
-                        url:'/wechatService/aleadyZoneReact',
-                        type: 'POST',
-                        contentType:'application/json;charset=utf-8',
-                        data : data,
-                        dataType : 'json',
-                        success:function (data) {
-                            console.log(data);
-                            var html="";
-                            html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
-                            html +="<thead>";
-                            html +="<tr>";
-                            html +="<th width='15%'>openId</th>";
-                            html +="<th width='15%'>微信名</th>";
-                            html +=       "<th width='5%'>性别</th>";
-                            html +=       "<th width='7%'>语言</th>";
-                            html +=       "<th width='7%'>城市</th>";
-                            html +=       "<th width='7%'>省份</th>";
-                            html +=       "<th width='7%'>国家</th>";
-                            html +=       "<th width='10%'>分区区域</th>";
-                            html +=       "</tr>";
-                            html +=       "</thead>";
-                            html += "<tbody>";
-                            for(var i=0;i<data.length;i++){
-                                html+="<tr>";
-                                html+="<td>";
-                                html+=data[i].openid;
-                                html+="</td>";
-                                html+="<td>";
-                                html+=data[i].nickname;
-                                html+="</td>";
-                                html+="<td>";
-                                html+=data[i].sex;
-                                html+="</td>";
-                                html+="<td>";
-                                html+=data[i].language;
-                                html+="</td>";
-                                html+="<td>";
-                                html+=data[i].city;
-                                html+="</td>";
-                                html+="<td>";
-                                html+=data[i].province;
-                                html+="</td>";
-                                html+="<td>";
-                                html+=data[i].country;
-                                html+="</td>";
-                                html+="<td>";
-                                html+=data[i].area;
-                                html+="</td>";
-                                html+="</tr>";
-                            }
-                            html+= "</tbody>";
-                            html+= "</table>";
-                            $('#userdiv').html(html);
-                            $('#selectArea').val(selectArea);
-                        },
-                        error:function (data) {
-                            console.log(data);
+                var data = JSON.stringify({
+                    area: selectArea
+                });
+                console.log(data);
+                $.ajax({
+                    url: '/wechatService/aleadyZoneReact',
+                    type: 'POST',
+                    contentType: 'application/json;charset=utf-8',
+                    data: data,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        var html = "";
+                        html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
+                        html += "<thead>";
+                        html += "<tr>";
+                        html += "<th width='15%'>openId</th>";
+                        html += "<th width='15%'>微信名</th>";
+                        html += "<th width='5%'>性别</th>";
+                        html += "<th width='7%'>语言</th>";
+                        html += "<th width='7%'>城市</th>";
+                        html += "<th width='7%'>省份</th>";
+                        html += "<th width='7%'>国家</th>";
+                        html += "<th width='10%'>分区区域</th>";
+                        html += "</tr>";
+                        html += "</thead>";
+                        html += "<tbody>";
+                        for (var i = 0; i < data.length; i++) {
+                            html += "<tr>";
+                            html += "<td>";
+                            html += data[i].openid;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].nickname;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].sex;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].language;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].city;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].province;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].country;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].area;
+                            html += "</td>";
+                            html += "</tr>";
                         }
-                    })
-                }
+                        html += "</tbody>";
+                        html += "</table>";
+                        $('#userdiv').html(html);
+                        $('#selectArea').val(selectArea);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                })
             });
         });
     </script>
@@ -186,14 +184,13 @@
                                                 class="fa fa-angle-up text-active"></i> </span> <span>旅游-预警</span> </a>
                                         <ul class="nav lt">
                                             <li>
-                                                <a href="weibo"> <i class="fa fa-angle-right"></i> <span>微博信息</span>
+                                                <a href="spider"> <i class="fa fa-angle-right"></i> <span>微博爬虫</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="icons.html"> <b class="badge bg-info pull-right">369</b> <i
-                                                        class="fa fa-angle-right"></i> <span>Icons</span> </a>
+                                                <a href="weibo"> <i class="fa fa-angle-right"></i> <span>微博信息</span>
+                                                </a>
                                             </li>
-
                                         </ul>
                                     </li>
                                     <li>
@@ -202,8 +199,8 @@
                                                 class="fa fa-angle-up text-active"></i> </span> <span>模板消息</span> </a>
                                         <ul class="nav lt">
                                             <li>
-                                                <a href="gallery.html"> <i class="fa fa-angle-right"></i>
-                                                    <span>Gallery</span> </a>
+                                                <a href="weiboTemp"> <i class="fa fa-angle-right"></i>
+                                                    <span>模板审核</span> </a>
                                             </li>
 
                                         </ul>

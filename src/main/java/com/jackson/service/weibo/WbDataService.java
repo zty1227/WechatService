@@ -17,4 +17,6 @@ public interface WbDataService {
 
     public void updateByContentId(WeiboData weiboData) throws Exception;
 
+    public List<WeiboData> findByZone(String zone) throws Exception;
+
 }

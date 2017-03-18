@@ -8,7 +8,9 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhangtianyu on 2017/3/8.
@@ -17,6 +19,7 @@ import java.util.List;
 public class WeiboFriendsPipeline implements Pipeline {
 
     public static int size = 0;
+
 
     @Autowired
     protected WbDataService wbDataService;
@@ -31,10 +34,8 @@ public class WeiboFriendsPipeline implements Pipeline {
                     wbDataService.updateByContentId(weiboDataList.get(i));
                 } else {
 //                    System.out.println("save");
-
                     wbDataService.save(weiboDataList.get(i));
                     size++;
-
                     System.out.println(size);
                 }
             } catch (Exception e) {

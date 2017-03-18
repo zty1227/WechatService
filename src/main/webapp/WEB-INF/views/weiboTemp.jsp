@@ -32,21 +32,58 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var baseUrl = $("#baseUrl").attr("href");
-            $("#refer").click(function () {
+            console.log(baseUrl);
+            $("#apply").click(function () {
+                var selectZone = $("#selectZone").val();
+                var data = JSON.stringify({
+                    zone: selectZone
+                });
+                console.log(data);
                 $.ajax({
-                    url: '/wechatService/travspider',
+                    url: '/wechatService/weiboZone',
                     type: 'POST',
                     contentType: 'application/json;charset=utf-8',
                     data: data,
-                    dataType: 'text',
+                    dataType: 'json',
                     success: function (data) {
                         console.log(data);
+                        var html = "";
+                        html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
+                        html += "<thead>";
+                        html += "<tr>";
+                        html += "<th  hidden='hidden'>信息id</th>";
+                        html += "</tr>";
+                        html += "<tr>";
+                        html += "<th width='90%'>微博内容</th>";
+                        html += "</tr>";
+                        html += "<tr>";
+                        html += "<th hidden='hidden'>提审</th>";
+                        html += "</tr>";
+                        html += "</thead>";
+                        html += "<tbody>";
+                        for (var i = 0; i < data.length; i++) {
+                            html += "<tr>";
+                            html += "<td id='contentid" + i + "' hidden='hidden'>";
+                            html += data[i].contentid;
+                            html += "</td>";
+                            html += "<td>";
+                            html += data[i].content;
+                            html += "</td>";
+                            html += "<td>";
+                            html += "<button id='refer" + i + "' type='button' class='pull-right btn btn-sm btn-default'>提交审核</button>";
+                            html += "</td>";
+                            html += "</tr>";
+                        }
+                        html += "</tbody>";
+                        html += "</table>";
+                        $('#userdiv').html(html);
+                        $('#selectZone').val(selectZone);
                     },
                     error: function (data) {
                         console.log(data);
                     }
                 })
-            })
+            });
         });
     </script>
     <![endif]-->
@@ -104,7 +141,7 @@
                             <nav class="nav-primary hidden-xs">
                                 <ul class="nav">
                                     <li>
-                                        <a href="index.jsp" class="active"> <i class="fa fa-dashboard icon"> <b
+                                        <a href="index" class="active"> <i class="fa fa-dashboard icon"> <b
                                                 class="bg-danger"></b> </i> <span>微信后台</span> </a>
                                     </li>
                                     <li>
@@ -126,7 +163,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="active">
+                                    <li>
                                         <a href="warning.jsp"> <i class="fa fa-flask icon"> <b class="bg-success"></b>
                                         </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i
                                                 class="fa fa-angle-up text-active"></i> </span> <span>旅游-预警</span> </a>
@@ -135,21 +172,21 @@
                                                 <a href="spider"> <i class="fa fa-angle-right"></i> <span>微博爬虫</span>
                                                 </a>
                                             </li>
-                                            <li class="active">
+                                            <li>
                                                 <a href="weibo"> <i class="fa fa-angle-right"></i> <span>微博信息</span>
                                                 </a>
                                             </li>
 
                                         </ul>
                                     </li>
-                                    <li>
+                                    <li class="active">
                                         <a href="#pages"> <i class="fa fa-file-text icon"> <b class="bg-primary"></b>
                                         </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i
                                                 class="fa fa-angle-up text-active"></i> </span> <span>模板消息</span> </a>
                                         <ul class="nav lt">
-                                            <li>
-                                                <a href="weiboTemp"> <i class="fa fa-angle-right"></i>
-                                                    <span>模板审核</span> </a>
+                                            <li class="alive">
+                                                <a href="weiboTemp"> <i class="fa fa-angle-right"></i> <span>模板审核</span>
+                                                </a>
                                             </li>
 
                                         </ul>
@@ -174,29 +211,59 @@
                         </session>
                         <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                             <li>
-                                <i class="fa fa-home">旅游-预警</i>
+                                <i class="fa fa-home">模板消息</i>
                             </li>
                             <li class="active">
-                                <a href="weibo">微博信息</a>
+                                <a href="weibo">模板审核</a>
                             </li>
                         </ul>
                         <div class="m-b-md">
-                            <h3 class="m-b-none">微博爬虫</h3>
+                            <h3 class="m-b-none">提交模板信息</h3>
                             <small>student wechat service</small>
                         </div>
                         <section class="panel panel-default">
-                            <div class="row m-l-none m-r-none bg-light lter"
-                                 style="width: 600px; height: 400px;padding: 100px 20px 200px 150px">
-                                <%--<header class="panel-heading">微博信息<i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i> </header>--%>
-                                <div>
-                                    <button id="refer" type="button" class="pull-right btn btn-sm btn-default">
-                                        启动旅游号爬虫
-                                    </button>
+                            <div class="row m-l-none m-r-none bg-light lter">
+                                <header class="panel-heading">微博信息<i class="fa fa-info-sign text-muted"
+                                                                     data-toggle="tooltip" data-placement="bottom"
+                                                                     data-title="ajax to load the data."></i></header>
+                                <div class="row">
+                                    <div class="col-sm-5 m-b-xs">
+                                        <select id="selectZone" class="input-sm form-control input-s-sm inline">
+                                            <option value="all">All</option>
+                                            <option value="湖北">湖北</option>
+                                            <option value="湖南">湖南</option>
+                                            <option value="陕西">陕西</option>
+                                        </select>
+                                        <button id="apply" class="btn btn-sm btn-default">Apply</button>
+                                    </div>
+                                    <div class="pull-right col-sm-3">
+                                        <div class="input-group">
+                                            <input type="text" class="input-sm form-control" placeholder="Search">
+                                            <span class="input-group-btn">
+                                             <button class="btn btn-sm btn-default" type="button">Go!</button>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <button id="search" type="button" class="pull-right btn btn-sm btn-default">
-                                        启动搜索爬虫
-                                    </button>
+                                <div id="userdiv" class="table-responsive">
+                                    <table id="userTable" class="table table-striped m-b-none" data-ride="datatables">
+                                        <%--<thead>--%>
+                                        <%--<tr>--%>
+                                        <%--<th width="55%">微博内容</th>--%>
+                                        <%--<th width="25%">图片地址</th>--%>
+                                        <%--<th width="15%">微博来源</th>--%>
+                                        <%--</tr>--%>
+                                        <%--</thead>--%>
+                                        <%--<tbody>--%>
+                                        <%--<s:forEach items="${weiboDataList}" var="weiboDataList" varStatus="i">--%>
+                                        <%--<tr>--%>
+                                        <%--<td>${weiboDataList.content}</td>--%>
+                                        <%--<td>${weiboDataList.imgurl}</td>--%>
+                                        <%--<td>${weiboDataList.weiboname}</td>--%>
+                                        <%--</tr>--%>
+                                        <%--</s:forEach>--%>
+                                        <%--</tbody>--%>
+                                    </table>
                                 </div>
                             </div>
                         </section>

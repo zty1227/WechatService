@@ -9,6 +9,8 @@ public class WeiboData {
 
     private String weiboname;
 
+    private String zone;
+
     public String getContentid() {
         return contentid;
     }
@@ -41,6 +43,14 @@ public class WeiboData {
         this.weiboname = weiboname == null ? null : weiboname.trim();
     }
 
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone == null ? null : zone.trim();
+    }
+
     @Override
     public String toString() {
         return "WeiboData{" +
@@ -48,6 +58,7 @@ public class WeiboData {
                 ", content='" + content + '\'' +
                 ", imgurl='" + imgurl + '\'' +
                 ", weiboname='" + weiboname + '\'' +
+                ", zone='" + zone + '\'' +
                 '}';
     }
 }
