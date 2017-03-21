@@ -31,6 +31,7 @@
     <script src="js/jquery-3.1.1.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            var date;
             var baseUrl = $("#baseUrl").attr("href");
             console.log(baseUrl);
             $("#apply").click(function () {
@@ -47,36 +48,43 @@
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
-                        var html = "";
-                        html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
-                        html += "<thead>";
-                        html += "<tr>";
-                        html += "<th  hidden='hidden'>信息id</th>";
-                        html += "</tr>";
-                        html += "<tr>";
-                        html += "<th width='90%'>微博内容</th>";
-                        html += "</tr>";
-                        html += "<tr>";
-                        html += "<th hidden='hidden'>提审</th>";
-                        html += "</tr>";
-                        html += "</thead>";
-                        html += "<tbody>";
-                        for (var i = 0; i < data.length; i++) {
-                            html += "<tr>";
-                            html += "<td id='contentid" + i + "' hidden='hidden'>";
-                            html += data[i].contentid;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].content;
-                            html += "</td>";
-                            html += "<td>";
-                            html += "<button id='refer" + i + "' type='button' class='pull-right btn btn-sm btn-default'>提交审核</button>";
-                            html += "</td>";
-                            html += "</tr>";
-                        }
-                        html += "</tbody>";
-                        html += "</table>";
-                        $('#userdiv').html(html);
+                        //分页
+                        $('.pagination').jqPaginator({
+                            totalCounts: data.length
+                        });
+//                        var html = "";
+//                        html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
+//                        html += "<thead>";
+//                        html += "<tr>";
+//                        html += "<th  hidden='hidden'>信息id</th>";
+//                        html += "</tr>";
+//                        html += "<tr>";
+//                        html += "<th width='90%'>微博内容</th>";
+//                        html += "</tr>";
+//                        html += "<tr>";
+//                        html += "<th hidden='hidden'>提审</th>";
+//                        html += "</tr>";
+//                        html += "</thead>";
+//                        html += "<tbody>";
+//                        for (var i = 0; i < data.length; i++) {
+//                            html += "<tr>";
+//                            html += "<td id='contentid" + i + "' hidden='hidden'>";
+//                            html += data[i].contentid;
+//                            html += "</td>";
+//                            html += "<td>";
+//                            html += data[i].content;
+//                            html += "</td>";
+//                            html += "<td>";
+//                            html += "<button id='refer" + i + "' type='button' class='pull-right btn btn-sm btn-default'>提交审核</button>";
+//                            html += "</td>";
+//                            html += "</tr>";
+//                        }
+                        $("#countstmp").val(data.length);
+                        date = data.length;
+                        console.info(date);
+//                        html += "</tbody>";
+//                        html += "</table>";
+//                        $('#userdiv').html(html);
                         $('#selectZone').val(selectZone);
                     },
                     error: function (data) {
@@ -84,6 +92,7 @@
                     }
                 })
             });
+            console.info(date);
         });
     </script>
     <![endif]-->
@@ -208,7 +217,6 @@
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
-                        </session>
                         <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                             <li>
                                 <i class="fa fa-home">模板消息</i>
@@ -228,13 +236,18 @@
                                                                      data-title="ajax to load the data."></i></header>
                                 <div class="row">
                                     <div class="col-sm-5 m-b-xs">
-                                        <select id="selectZone" class="input-sm form-control input-s-sm inline">
-                                            <option value="all">All</option>
-                                            <option value="湖北">湖北</option>
-                                            <option value="湖南">湖南</option>
-                                            <option value="陕西">陕西</option>
-                                        </select>
-                                        <button id="apply" class="btn btn-sm btn-default">Apply</button>
+                                        <% String action1 = path + "/searchZone";%>
+                                        <form data-validate="parsley" method="post" action="<%=action1 %>">
+                                            <select name="selectZone" id="selectZone"
+                                                    class="input-sm form-control input-s-sm inline">
+                                                <option value="all">All</option>
+                                                <option value="湖北">湖北</option>
+                                                <option value="湖南">湖南</option>
+                                                <option value="陕西">陕西</option>
+                                            </select>
+                                            <button id="apply" type="submit" class="btn btn-sm btn-default">Apply
+                                            </button>
+                                        </form>
                                     </div>
                                     <div class="pull-right col-sm-3">
                                         <div class="input-group">
@@ -247,24 +260,41 @@
                                 </div>
                                 <div id="userdiv" class="table-responsive">
                                     <table id="userTable" class="table table-striped m-b-none" data-ride="datatables">
-                                        <%--<thead>--%>
-                                        <%--<tr>--%>
-                                        <%--<th width="55%">微博内容</th>--%>
-                                        <%--<th width="25%">图片地址</th>--%>
-                                        <%--<th width="15%">微博来源</th>--%>
-                                        <%--</tr>--%>
-                                        <%--</thead>--%>
-                                        <%--<tbody>--%>
-                                        <%--<s:forEach items="${weiboDataList}" var="weiboDataList" varStatus="i">--%>
-                                        <%--<tr>--%>
-                                        <%--<td>${weiboDataList.content}</td>--%>
-                                        <%--<td>${weiboDataList.imgurl}</td>--%>
-                                        <%--<td>${weiboDataList.weiboname}</td>--%>
-                                        <%--</tr>--%>
-                                        <%--</s:forEach>--%>
-                                        <%--</tbody>--%>
+                                        <thead>
+                                        <tr>
+                                            <th width="55%">微博内容</th>
+                                            <th width="25%">图片地址</th>
+                                            <th width="15%">微博来源</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <s:forEach items="${weiboDataList}" var="weiboDataList" varStatus="i">
+                                            <tr>
+                                                <td>${weiboDataList.content}</td>
+                                                <td>${weiboDataList.imgurl}</td>
+                                                <td>${weiboDataList.weiboname}</td>
+                                            </tr>
+                                        </s:forEach>
+                                        </tbody>
                                     </table>
                                 </div>
+                            </div>
+
+                            <div style="margin-left:30%">
+                                <ul class="pagination pagination-sm m-t-none m-b-none"
+                                    id="pagination">
+                                    <!--  <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>-->
+                                </ul>
+                            </div>
+                            <div>
+                                <input type="hidden" value="${pageSize}" id="pageSize"/>
+                                <input type="hidden" value="${counts}" id="counts"/>
                             </div>
                         </section>
                     </section>
@@ -275,6 +305,8 @@
             <aside class="bg-light lter b-l aside-md hide" id="notes">
                 <div class="wrapper">Notification</div>
             </aside>
+
+
         </section>
     </section>
 </section>
@@ -291,6 +323,94 @@
 <script src="js/calendar/bootstrap_calendar.js" cache="false"></script>
 <script src="js/calendar/demo.js" cache="false"></script>
 <script src="js/sortable/jquery.sortable.js" cache="false"></script>
+<script src="js/jqPaginator.js" cache="false"></script>
+<script>
+    <%--<input type="hidden" value="${username}" id="username"/>--%>
+    <%--<input type="hidden" value="<%=request.getContextPath()%>" id="contextPath"/>--%>
+    //记录总页面和每页数
+    var ps = Number(document.getElementById("pageSize").value);
+    console.info(ps);
+    var tc = Number(document.getElementById("counts").value);
+    var datelength;
+    console.info(tc);
+    //分页
+    $('.pagination').jqPaginator({
+        totalCounts: tc,
+        pageSize: ps,
+        visiblePages: 5,
+        currentPage: 1,
+        first: '<li class="first"><a href="javascript:;">首页</a></li>',
+        last: '<li class="last"><a href="javascript:;">尾页</a></li>',
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            if ($("#orderpages_hidden").val() != 0) {
+                getPage(num);
+            }
+            //$('#p3').html('当前第' + num + '页');
+        }
+    });
+    //alert(document.getElementById("musicname").value);
+    //alert("${musicname}");
+    //获取每页的数据
+    function getPage(page, k) {
+        var ps = Number(document.getElementById("pageSize").value);
+        var tc = Number(document.getElementById("counts").value);
+        var zone = $("#selectZone").val();
+        //alert(tc);
+        //alert(sn);
+        $.ajax({
+            type: "POST",
+            url: "/wechatService/ajax_operation",
+            dataType: "json",
+            cache: false,
+            data: {
+                pageIndex: page,
+                pageSize: ps,
+                totalPage: tc,
+                zone: zone
+            },
+            async: false,
+            error: function () {
+                alert("网络异常！");
+            },
+            success: function (data) {
+                var html = "";
+                html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
+                html += "<thead>";
+                html += "<tr>";
+                html += "<th  hidden='hidden'>信息id</th>";
+                html += "</tr>";
+                html += "<tr>";
+                html += "<th width='90%'>微博内容</th>";
+                html += "</tr>";
+                html += "<tr>";
+                html += "<th hidden='hidden'>提审</th>";
+                html += "</tr>";
+                html += "</thead>";
+                html += "<tbody>";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<tr>";
+                    html += "<td id='contentid" + i + "' hidden='hidden'>";
+                    html += data[i].contentid;
+                    html += "</td>";
+                    html += "<td>";
+                    html += data[i].content;
+                    html += "</td>";
+                    html += "<td>";
+                    html += "<button id='refer" + i + "' type='button' class='pull-right btn btn-sm btn-default'>提交审核</button>";
+                    html += "</td>";
+                    html += "</tr>";
+                }
+                html += ' </tbody>';
+                html += '</table>';
+                $('#userdiv').html(html);
+            }
+        });
+    }
+    ;
+    $('#selectZone').val("${selectZone == null?'all': selectZone}");
+</script>
 </body>
-
 </html>

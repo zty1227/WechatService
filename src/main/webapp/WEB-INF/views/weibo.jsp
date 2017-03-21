@@ -111,7 +111,8 @@
                                         <a href="#pages"> <i class="fa fa-file-text icon"> <b class="bg-primary"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>模板消息</span> </a>
                                         <ul class="nav lt">
                                             <li>
-                                                <a href="gallery.html"> <i class="fa fa-angle-right"></i> <span>Gallery</span> </a>
+                                                <a href="gallery.html"> <i class="fa fa-angle-right"></i>
+                                                    <span>模板审核</span> </a>
                                             </li>
 
                                         </ul>

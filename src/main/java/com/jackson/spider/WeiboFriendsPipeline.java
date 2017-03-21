@@ -8,9 +8,7 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zhangtianyu on 2017/3/8.
@@ -39,6 +37,7 @@ public class WeiboFriendsPipeline implements Pipeline {
                     System.out.println(size);
                 }
             } catch (Exception e) {
+                size--;
                 e.printStackTrace();
             }
         }
