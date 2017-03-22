@@ -5,8 +5,13 @@
     <id column="contentId" jdbcType="VARCHAR" property="contentid" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="imgUrl" jdbcType="VARCHAR" property="imgurl" />
+      <result column="time" jdbcType="VARCHAR" property="time"/>
+      <result column="zan" jdbcType="INTEGER" property="zan"/>
+      <result column="zhuanFa" jdbcType="INTEGER" property="zhuanfa"/>
+      <result column="pingLun" jdbcType="INTEGER" property="pinglun"/>
     <result column="weiboName" jdbcType="VARCHAR" property="weiboname" />
       <result column="zone" jdbcType="VARCHAR" property="zone"/>
+      <result column="isCheck" jdbcType="BIT" property="ischeck"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-      contentId, content, imgUrl, weiboName, zone
+      contentId, content, imgUrl, time, zan, zhuanFa, pingLun, weiboName, zone, isCheck
   </sql>
   <select id="selectByExample" parameterType="com.jackson.entity.WeiboDataExample" resultMap="BaseResultMap">
     select
@@ -100,10 +105,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jackson.entity.WeiboData">
-    insert into WeiboData (contentId, content, imgUrl,
-      weiboName, zone)
-    values (#{contentid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR},
-      #{weiboname,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR})
+      insert into WeiboData (contentId, content, imgUrl,
+      time, zan, zhuanFa,
+      pingLun, weiboName, zone,
+      isCheck)
+      values (#{contentid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR},
+      #{time,jdbcType=VARCHAR}, #{zan,jdbcType=INTEGER}, #{zhuanfa,jdbcType=INTEGER},
+      #{pinglun,jdbcType=INTEGER}, #{weiboname,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR},
+      #{ischeck,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.jackson.entity.WeiboData">
     insert into WeiboData
@@ -117,11 +126,26 @@
       <if test="imgurl != null">
         imgUrl,
       </if>
+        <if test="time != null">
+            time,
+        </if>
+        <if test="zan != null">
+            zan,
+        </if>
+        <if test="zhuanfa != null">
+            zhuanFa,
+        </if>
+        <if test="pinglun != null">
+            pingLun,
+        </if>
       <if test="weiboname != null">
         weiboName,
       </if>
         <if test="zone != null">
             zone,
+        </if>
+        <if test="ischeck != null">
+            isCheck,
         </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -134,11 +158,26 @@
       <if test="imgurl != null">
         #{imgurl,jdbcType=VARCHAR},
       </if>
+        <if test="time != null">
+            #{time,jdbcType=VARCHAR},
+        </if>
+        <if test="zan != null">
+            #{zan,jdbcType=INTEGER},
+        </if>
+        <if test="zhuanfa != null">
+            #{zhuanfa,jdbcType=INTEGER},
+        </if>
+        <if test="pinglun != null">
+            #{pinglun,jdbcType=INTEGER},
+        </if>
       <if test="weiboname != null">
         #{weiboname,jdbcType=VARCHAR},
       </if>
         <if test="zone != null">
             #{zone,jdbcType=VARCHAR},
+        </if>
+        <if test="ischeck != null">
+            #{ischeck,jdbcType=BIT},
         </if>
     </trim>
   </insert>
@@ -160,11 +199,26 @@
       <if test="record.imgurl != null">
         imgUrl = #{record.imgurl,jdbcType=VARCHAR},
       </if>
+        <if test="record.time != null">
+            time = #{record.time,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zan != null">
+            zan = #{record.zan,jdbcType=INTEGER},
+        </if>
+        <if test="record.zhuanfa != null">
+            zhuanFa = #{record.zhuanfa,jdbcType=INTEGER},
+        </if>
+        <if test="record.pinglun != null">
+            pingLun = #{record.pinglun,jdbcType=INTEGER},
+        </if>
       <if test="record.weiboname != null">
         weiboName = #{record.weiboname,jdbcType=VARCHAR},
       </if>
         <if test="record.zone != null">
             zone = #{record.zone,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ischeck != null">
+            isCheck = #{record.ischeck,jdbcType=BIT},
         </if>
     </set>
     <if test="_parameter != null">
@@ -176,8 +230,13 @@
     set contentId = #{record.contentid,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       imgUrl = #{record.imgurl,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=VARCHAR},
+      zan = #{record.zan,jdbcType=INTEGER},
+      zhuanFa = #{record.zhuanfa,jdbcType=INTEGER},
+      pingLun = #{record.pinglun,jdbcType=INTEGER},
       weiboName = #{record.weiboname,jdbcType=VARCHAR},
-      zone = #{record.zone,jdbcType=VARCHAR}
+      zone = #{record.zone,jdbcType=VARCHAR},
+      isCheck = #{record.ischeck,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -191,11 +250,26 @@
       <if test="imgurl != null">
         imgUrl = #{imgurl,jdbcType=VARCHAR},
       </if>
+        <if test="time != null">
+            time = #{time,jdbcType=VARCHAR},
+        </if>
+        <if test="zan != null">
+            zan = #{zan,jdbcType=INTEGER},
+        </if>
+        <if test="zhuanfa != null">
+            zhuanFa = #{zhuanfa,jdbcType=INTEGER},
+        </if>
+        <if test="pinglun != null">
+            pingLun = #{pinglun,jdbcType=INTEGER},
+        </if>
       <if test="weiboname != null">
         weiboName = #{weiboname,jdbcType=VARCHAR},
       </if>
         <if test="zone != null">
             zone = #{zone,jdbcType=VARCHAR},
+        </if>
+        <if test="ischeck != null">
+            isCheck = #{ischeck,jdbcType=BIT},
         </if>
     </set>
     where contentId = #{contentid,jdbcType=VARCHAR}
@@ -204,17 +278,22 @@
     update WeiboData
     set content = #{content,jdbcType=VARCHAR},
       imgUrl = #{imgurl,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      zan = #{zan,jdbcType=INTEGER},
+      zhuanFa = #{zhuanfa,jdbcType=INTEGER},
+      pingLun = #{pinglun,jdbcType=INTEGER},
       weiboName = #{weiboname,jdbcType=VARCHAR},
-      zone = #{zone,jdbcType=VARCHAR}
+      zone = #{zone,jdbcType=VARCHAR},
+      isCheck = #{ischeck,jdbcType=BIT}
     where contentId = #{contentid,jdbcType=VARCHAR}
   </update>
     <select id="findAll" parameterType="com.jackson.entity.WeiboData" resultType="com.jackson.entity.WeiboData">
-        SELECT * FROM WeiboData
+        SELECT * FROM WeiboData ORDER BY time DESC
     </select>
     <select id="findByContentId" parameterType="java.lang.String" resultType="com.jackson.entity.WeiboData">
         SELECT * FROM WeiboData WHERE contentId = #{contentId}
     </select>
     <select id="findByZone" parameterType="java.lang.String" resultType="com.jackson.entity.WeiboData">
-        SELECT * FROM WeiboData WHERE zone= #{zone}
+        SELECT * FROM WeiboData WHERE zone= #{zone} ORDER BY time DESC
     </select>
 </mapper>

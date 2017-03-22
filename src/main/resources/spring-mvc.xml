@@ -74,6 +74,16 @@
         <property name="prefix" value="/WEB-INF/views/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
+
+    <!--&lt;!&ndash; 使用tiles2的视图解析,其中tiles模板文件定义在/WEB-INF/views/**/views.xml &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver"/>-->
+    <!--<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">-->
+    <!--<property name="definitions">-->
+    <!--<list>-->
+    <!--<value>/WEB-INF/views.xml</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
     <!-- 配置必要 加载静态资源等 -->
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven></mvc:annotation-driven>

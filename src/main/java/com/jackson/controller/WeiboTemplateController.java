@@ -4,7 +4,6 @@ import com.jackson.entity.WeiboData;
 import com.jackson.service.weibo.WbDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,12 +31,13 @@ public class WeiboTemplateController {
         mv.setViewName("weiboTemp");
         mv.addObject("weiboDataList", weiboDataList);
         mv.addObject("counts", weiboDataList.size());
+        mv.addObject("zone", "all");
         mv.addObject("pageSize", 20);
         return mv;
     }
 
-    @RequestMapping(value = "searchZone")
-    public ModelAndView searchZone(Model model, HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "selectZone")
+    public ModelAndView searchZone(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
         String zone = request.getParameter("selectZone");
         System.out.println(zone);
@@ -52,26 +52,38 @@ public class WeiboTemplateController {
         mv.addObject("weiboDataList", weiboDataList);
         mv.addObject("pageSize", 20);
         mv.addObject("counts", weiboDataList.size());
+        mv.addObject("zone", zone);
         mv.addObject("selectZone", zone);
         return mv;
     }
 
-    @RequestMapping(value = "weiboZone")
-    public
+    @RequestMapping(value = "/refer")
     @ResponseBody
-    List<WeiboData> aleadyZoneReact(@RequestBody HashMap<String, Object> map, HttpServletRequest request) throws Exception {
-        String zone = map.get("zone").toString();
-        System.out.println(zone);
-        List<WeiboData> weiboDataList = null;
-        if ("all".equals(zone)) {
-            weiboDataList = wbDataService.findAll();
-        } else {
-            weiboDataList = wbDataService.findByZone(zone);
-        }
-        System.out.println(weiboDataList.size());
-        request.getSession().setAttribute("totalPage", weiboDataList.size());
-        return weiboDataList.subList(0, 20);
+    public String refer(@RequestBody HashMap<String, Object> map) throws Exception {
+        String contentid = map.get("contentid").toString();
+        System.out.println(contentid);
+        WeiboData weiboData = wbDataService.findByContentId(contentid);
+        weiboData.setIscheck(true);
+        wbDataService.updateByContentId(weiboData);
+//        System.out.println(weiboData.toString());
+        return "ok";
     }
+//    @RequestMapping(value = "weiboZone")
+//    public
+//    @ResponseBody
+//    List<WeiboData> aleadyZoneReact(@RequestBody HashMap<String, Object> map, HttpServletRequest request) throws Exception {
+//        String zone = map.get("zone").toString();
+//        System.out.println(zone);
+//        List<WeiboData> weiboDataList = null;
+//        if ("all".equals(zone)) {
+//            weiboDataList = wbDataService.findAll();
+//        } else {
+//            weiboDataList = wbDataService.findByZone(zone);
+//        }
+//        System.out.println(weiboDataList.size());
+//        request.getSession().setAttribute("totalPage", weiboDataList.size());
+//        return weiboDataList.subList(0, 20);
+//    }
 
     /**
      * ajax
@@ -97,7 +109,8 @@ public class WeiboTemplateController {
      */
     public List<WeiboData> ajax_common1(String pageIndex, String pageSize, String totalPage, String zone) throws Exception {
         List<WeiboData> weiboDataList = null;
-        if (zone.equals("all")) {
+//        System.out.println(zone +"------");
+        if ("all".equals(zone)) {
             weiboDataList = wbDataService.findAll();
         } else {
             weiboDataList = wbDataService.findByZone(zone);

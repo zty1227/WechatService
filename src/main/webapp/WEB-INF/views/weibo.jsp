@@ -111,7 +111,7 @@
                                         <a href="#pages"> <i class="fa fa-file-text icon"> <b class="bg-primary"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>模板消息</span> </a>
                                         <ul class="nav lt">
                                             <li>
-                                                <a href="gallery.html"> <i class="fa fa-angle-right"></i>
+                                                <a href="weiboTemp"> <i class="fa fa-angle-right"></i>
                                                     <span>模板审核</span> </a>
                                             </li>
 
@@ -143,7 +143,7 @@
                             </li>
                         </ul>
                         <div class="m-b-md">
-                            <h3 class="m-b-none">微博爬虫</h3>
+                            <h3 class="m-b-none">微博信息</h3>
                             <small>student wechat service</small> </div>
                         <section class="panel panel-default">
                             <div class="row m-l-none m-r-none bg-light lter">

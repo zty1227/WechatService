@@ -26,7 +26,7 @@ public class WeiboSpiderController extends GenericController {
 
     @RequestMapping(value = "spider")
     public String spider(){
-        crawlService.weiboCrawl();
+//        crawlService.weiboCrawl();
         return "spider";
     }
 

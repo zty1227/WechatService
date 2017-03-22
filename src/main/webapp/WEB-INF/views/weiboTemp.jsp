@@ -29,72 +29,7 @@
     <script src="js/ie/excanvas.js" cache="false"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/jquery-3.1.1.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var date;
-            var baseUrl = $("#baseUrl").attr("href");
-            console.log(baseUrl);
-            $("#apply").click(function () {
-                var selectZone = $("#selectZone").val();
-                var data = JSON.stringify({
-                    zone: selectZone
-                });
-                console.log(data);
-                $.ajax({
-                    url: '/wechatService/weiboZone',
-                    type: 'POST',
-                    contentType: 'application/json;charset=utf-8',
-                    data: data,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        //分页
-                        $('.pagination').jqPaginator({
-                            totalCounts: data.length
-                        });
-//                        var html = "";
-//                        html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
-//                        html += "<thead>";
-//                        html += "<tr>";
-//                        html += "<th  hidden='hidden'>信息id</th>";
-//                        html += "</tr>";
-//                        html += "<tr>";
-//                        html += "<th width='90%'>微博内容</th>";
-//                        html += "</tr>";
-//                        html += "<tr>";
-//                        html += "<th hidden='hidden'>提审</th>";
-//                        html += "</tr>";
-//                        html += "</thead>";
-//                        html += "<tbody>";
-//                        for (var i = 0; i < data.length; i++) {
-//                            html += "<tr>";
-//                            html += "<td id='contentid" + i + "' hidden='hidden'>";
-//                            html += data[i].contentid;
-//                            html += "</td>";
-//                            html += "<td>";
-//                            html += data[i].content;
-//                            html += "</td>";
-//                            html += "<td>";
-//                            html += "<button id='refer" + i + "' type='button' class='pull-right btn btn-sm btn-default'>提交审核</button>";
-//                            html += "</td>";
-//                            html += "</tr>";
-//                        }
-                        $("#countstmp").val(data.length);
-                        date = data.length;
-                        console.info(date);
-//                        html += "</tbody>";
-//                        html += "</table>";
-//                        $('#userdiv').html(html);
-                        $('#selectZone').val(selectZone);
-                    },
-                    error: function (data) {
-                        console.log(data);
-                    }
-                })
-            });
-            console.info(date);
-        });
-    </script>
+
     <![endif]-->
 </head>
 
@@ -236,14 +171,39 @@
                                                                      data-title="ajax to load the data."></i></header>
                                 <div class="row">
                                     <div class="col-sm-5 m-b-xs">
-                                        <% String action1 = path + "/searchZone";%>
-                                        <form data-validate="parsley" method="post" action="<%=action1 %>">
+                                        <% String action1 = path + "/selectZone";%>
+                                        <form data-validate="parsley" method="post" action="<%=action1%>">
                                             <select name="selectZone" id="selectZone"
                                                     class="input-sm form-control input-s-sm inline">
                                                 <option value="all">All</option>
                                                 <option value="湖北">湖北</option>
                                                 <option value="湖南">湖南</option>
                                                 <option value="陕西">陕西</option>
+                                                <option value="云南">云南</option>
+                                                <option value="浙江">浙江</option>
+                                                <option value="江苏">江苏</option>
+                                                <option value="山东">山东</option>
+                                                <option value="山西">山西</option>
+                                                <option value="新疆">新疆</option>
+                                                <option value="黑龙江">黑龙江</option>
+                                                <option value="河北">河北</option>
+                                                <option value="河南">河南</option>
+                                                <option value="四川">四川</option>
+                                                <option value="云南">云南</option>
+                                                <option value="福建">福建</option>
+                                                <option value="西藏">西藏</option>
+                                                <option value="海南">海南</option>
+                                                <option value="广东">广东</option>
+                                                <option value="广西">广西</option>
+                                                <option value="内蒙古">内蒙古</option>
+                                                <option value="宁夏">宁夏</option>
+                                                <option value="上海">上海</option>
+                                                <option value="吉林">吉林</option>
+                                                <option value="安徽">安徽</option>
+                                                <option value="江西">江西</option>
+                                                <option value="贵州">贵州</option>
+                                                <option value="辽宁">辽宁</option>
+                                                <option value="青海">青海</option>
                                             </select>
                                             <button id="apply" type="submit" class="btn btn-sm btn-default">Apply
                                             </button>
@@ -259,28 +219,12 @@
                                     </div>
                                 </div>
                                 <div id="userdiv" class="table-responsive">
-                                    <table id="userTable" class="table table-striped m-b-none" data-ride="datatables">
-                                        <thead>
-                                        <tr>
-                                            <th width="55%">微博内容</th>
-                                            <th width="25%">图片地址</th>
-                                            <th width="15%">微博来源</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <s:forEach items="${weiboDataList}" var="weiboDataList" varStatus="i">
-                                            <tr>
-                                                <td>${weiboDataList.content}</td>
-                                                <td>${weiboDataList.imgurl}</td>
-                                                <td>${weiboDataList.weiboname}</td>
-                                            </tr>
-                                        </s:forEach>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
-
-                            <div style="margin-left:30%">
+                            <div style="margin-left:45px;margin-top:5px;font-size:medium; float:left;font-style: italic">
+                                一共有${counts}条数据
+                            </div>
+                            <div style="margin-left:35%">
                                 <ul class="pagination pagination-sm m-t-none m-b-none"
                                     id="pagination">
                                     <!--  <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
@@ -295,6 +239,7 @@
                             <div>
                                 <input type="hidden" value="${pageSize}" id="pageSize"/>
                                 <input type="hidden" value="${counts}" id="counts"/>
+                                <input type="hidden" value="${zone}" id="zone"/>
                             </div>
                         </section>
                     </section>
@@ -357,7 +302,7 @@
     function getPage(page, k) {
         var ps = Number(document.getElementById("pageSize").value);
         var tc = Number(document.getElementById("counts").value);
-        var zone = $("#selectZone").val();
+        var zone = $("#zone").val();
         //alert(tc);
         //alert(sn);
         $.ajax({
@@ -379,18 +324,26 @@
                 var html = "";
                 html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
                 html += "<thead>";
+//                html += "<tr>";
+//                html += "<th  hidden='hidden'>信息id</th>";
+//                html += "</tr>";
                 html += "<tr>";
-                html += "<th  hidden='hidden'>信息id</th>";
-                html += "</tr>";
-                html += "<tr>";
-                html += "<th width='90%'>微博内容</th>";
-                html += "</tr>";
-                html += "<tr>";
-                html += "<th hidden='hidden'>提审</th>";
+                html += "<th width='60%'>微博内容</th>";
+                html += "<th width='10%'>微博时间</th>";
+                html += "<th width='10%'>微博来源</th>";
+
+//                html += "</tr>";
+//                html += "<tr>";
+                html += "<th width='10'>热度</th>";
+//                html += "</tr>";
+//                html += "<tr>";
+                html += "<th >提审</th>";
                 html += "</tr>";
                 html += "</thead>";
                 html += "<tbody>";
                 for (var i = 0; i < data.length; i++) {
+                    var redu;
+                    redu = data[i].zan + data[i].pinglun * 2 + data[i].zhuanfa * 3;
                     html += "<tr>";
                     html += "<td id='contentid" + i + "' hidden='hidden'>";
                     html += data[i].contentid;
@@ -399,7 +352,20 @@
                     html += data[i].content;
                     html += "</td>";
                     html += "<td>";
-                    html += "<button id='refer" + i + "' type='button' class='pull-right btn btn-sm btn-default'>提交审核</button>";
+                    html += data[i].time;
+                    html += "</td>";
+                    html += "<td>";
+                    html += data[i].weiboname;
+                    html += "</td>";
+                    html += "<td width='10%'>";
+                    html += redu;
+                    html += "</td>";
+                    html += "<td>";
+                    if (!data[i].ischeck) {
+                        html += "<div id='" + data[i].contentid + "'<button onclick=check('" + data[i].contentid + "') type='button' class='pull-right btn btn-sm btn-default' >提交审核</button></div>";
+                    } else {
+                        html += "<div id='" + data[i].contentid + "'<button disabled='true' type='button' class='pull-right btn btn-sm btn-default' >已经审核</button></div>";
+                    }
                     html += "</td>";
                     html += "</tr>";
                 }
@@ -411,6 +377,31 @@
     }
     ;
     $('#selectZone').val("${selectZone == null?'all': selectZone}");
+</script>
+<script type="text/javascript">
+    function check(contentid) {
+//        alert(contentid);
+        var data = JSON.stringify({
+            contentid: contentid
+        });
+        $.ajax({
+            url: '/wechatService/refer',
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            data: data,
+            dataType: 'text',
+            success: function (data) {
+                var b = document.getElementById(contentid);
+                var bt = $(b);
+                document.getElementById(contentid).innerHTML = "已经审核";
+                bt.attr("disabled", true);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+
+        });
+    }
 </script>
 </body>
 </html>
