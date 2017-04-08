@@ -49,5 +49,13 @@ public class WbDataServiceImpl implements WbDataService {
         return this.mapper.findByZone(zone);
     }
 
+    @Override
+    public List<WeiboData> findByIscheck(boolean ischeck) throws Exception {
+        return this.mapper.findByIscheck(ischeck);
+    }
 
+    @Override
+    public List<WeiboData> findByZoneAndIscheck(String zone, boolean ischeck) throws Exception {
+        return this.mapper.findByZoneAndIscheck(zone, ischeck);
+    }
 }

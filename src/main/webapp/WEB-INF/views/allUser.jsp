@@ -121,7 +121,11 @@
                                                 <a href="weiboTemp"> <i class="fa fa-angle-right"></i>
                                                     <span>模板审核</span> </a>
                                             </li>
-
+                                            <li>
+                                                <a href="aleadyCheck"> <i class="fa fa-angle-right"></i>
+                                                    <span>已审核消息</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>

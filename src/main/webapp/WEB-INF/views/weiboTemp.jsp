@@ -132,6 +132,11 @@
                                                 <a href="weiboTemp"> <i class="fa fa-angle-right"></i> <span>模板审核</span>
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="aleadyCheck"> <i class="fa fa-angle-right"></i>
+                                                    <span>已审核消息</span>
+                                                </a>
+                                            </li>
 
                                         </ul>
                                     </li>
@@ -157,7 +162,7 @@
                                 <i class="fa fa-home">模板消息</i>
                             </li>
                             <li class="active">
-                                <a href="weibo">模板审核</a>
+                                <a href="weiboTemp">模板审核</a>
                             </li>
                         </ul>
                         <div class="m-b-md">
@@ -343,6 +348,8 @@
                 html += "<tbody>";
                 for (var i = 0; i < data.length; i++) {
                     var redu;
+                    if (data[i].ischeck)
+                        continue;
                     redu = data[i].zan + data[i].pinglun * 2 + data[i].zhuanfa * 3;
                     html += "<tr>";
                     html += "<td id='contentid" + i + "' hidden='hidden'>";
@@ -361,11 +368,7 @@
                     html += redu;
                     html += "</td>";
                     html += "<td>";
-                    if (!data[i].ischeck) {
-                        html += "<div id='" + data[i].contentid + "'<button onclick=check('" + data[i].contentid + "') type='button' class='pull-right btn btn-sm btn-default' >提交审核</button></div>";
-                    } else {
-                        html += "<div id='" + data[i].contentid + "'<button disabled='true' type='button' class='pull-right btn btn-sm btn-default' >已经审核</button></div>";
-                    }
+                    html += "<div id='" + data[i].contentid + "'<button onclick=check('" + data[i].contentid + "') type='button' class='pull-right btn btn-sm btn-default' >提交审核</button></div>";
                     html += "</td>";
                     html += "</tr>";
                 }

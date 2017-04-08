@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhangtianyu on 2017/3/15.
@@ -127,4 +128,83 @@ public class WeiboTemplateController {
         return resultList;
     }
 
+
+    @RequestMapping(value = "aleadyCheck")
+    public ModelAndView aleadyCheck() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<WeiboData> weiboDataList = null;
+        weiboDataList = wbDataService.findByIscheck(true);
+        mv.setViewName("aleadyCheck");
+        mv.addObject("weiboDataList", weiboDataList);
+        mv.addObject("counts", weiboDataList.size());
+        mv.addObject("zone", "all");
+        mv.addObject("pageSize", 20);
+        return mv;
+    }
+
+    @RequestMapping(value = "selectCheck")
+    public ModelAndView selectCheck(HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String zone = request.getParameter("selectZone");
+        System.out.println("selectCheck" + zone);
+        List<WeiboData> weiboDataList = null;
+        if ("all".equals(zone)) {
+            weiboDataList = wbDataService.findByIscheck(true);
+        } else {
+            weiboDataList = wbDataService.findByZoneAndIscheck(zone, true);
+        }
+        System.out.println(weiboDataList.size());
+        mv.setViewName("aleadyCheck");
+        mv.addObject("weiboDataList", weiboDataList);
+        mv.addObject("pageSize", 20);
+        mv.addObject("counts", weiboDataList.size());
+        mv.addObject("zone", zone);
+        mv.addObject("selectZone", zone);
+        return mv;
+    }
+
+    /**
+     * ajax
+     *
+     * @param pageIndex pageSize
+     * @param totalPage
+     * @return
+     */
+    @RequestMapping("/ajax_operation2")
+    public
+    @ResponseBody
+    List<WeiboData> findSingerAjax2(String pageIndex, String pageSize, String totalPage, String zone) throws Exception {
+        return ajax_common2(pageIndex, pageSize, totalPage, zone);
+
+    }
+
+    /**
+     * 返回每页的数据
+     *
+     * @param pageIndex pageSize
+     * @param totalPage
+     * @return
+     */
+    public List<WeiboData> ajax_common2(String pageIndex, String pageSize, String totalPage, String zone) throws Exception {
+        List<WeiboData> weiboDataList = null;
+        Map<String, Object> map = new HashMap<>();
+        map.put("zone", zone);
+        map.put("ischeck", true);
+//        System.out.println(zone +"------");
+        if ("all".equals(zone)) {
+            weiboDataList = wbDataService.findByIscheck(true);
+        } else {
+            weiboDataList = wbDataService.findByZoneAndIscheck(zone, true);
+        }
+        Integer pageIndex1 = Integer.parseInt(pageIndex);
+        Integer pageSize1 = Integer.parseInt(pageSize);
+        Integer totalPage1 = Integer.parseInt(totalPage);
+        List<WeiboData> resultList = new ArrayList<WeiboData>();
+        if (pageIndex1 <= totalPage1 / pageSize1) {
+            resultList = weiboDataList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+        } else {
+            resultList = weiboDataList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+        }
+        return resultList;
+    }
 }

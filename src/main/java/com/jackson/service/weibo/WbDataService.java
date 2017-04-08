@@ -19,4 +19,7 @@ public interface WbDataService {
 
     public List<WeiboData> findByZone(String zone) throws Exception;
 
+    public List<WeiboData> findByIscheck(boolean ischeck) throws Exception;
+
+    public List<WeiboData> findByZoneAndIscheck(String zone, boolean ischeck) throws Exception;
 }

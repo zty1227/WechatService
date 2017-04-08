@@ -1,13 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: zhangtianyu
-  Date: 2017/2/20
-  Time: 下午8:46
+  Date: 2017/3/22
+  Time: 下午6:48
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -29,79 +29,8 @@
     <script src="js/ie/excanvas.js" cache="false"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/jquery-3.1.1.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var baseUrl = $("#baseUrl").attr("href");
-            console.log(baseUrl);
-            $("#apply").click(function () {
-                var selectArea = $("#selectArea").val();
-                var data = JSON.stringify({
-                    area: selectArea
-                });
-                console.log(data);
-                $.ajax({
-                    url: '/wechatService/aleadyZoneReact',
-                    type: 'POST',
-                    contentType: 'application/json;charset=utf-8',
-                    data: data,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        var html = "";
-                        html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
-                        html += "<thead>";
-                        html += "<tr>";
-                        html += "<th width='15%'>openId</th>";
-                        html += "<th width='15%'>微信名</th>";
-                        html += "<th width='5%'>性别</th>";
-                        html += "<th width='7%'>语言</th>";
-                        html += "<th width='7%'>城市</th>";
-                        html += "<th width='7%'>省份</th>";
-                        html += "<th width='7%'>国家</th>";
-                        html += "<th width='10%'>分区区域</th>";
-                        html += "</tr>";
-                        html += "</thead>";
-                        html += "<tbody>";
-                        for (var i = 0; i < data.length; i++) {
-                            html += "<tr>";
-                            html += "<td>";
-                            html += data[i].openid;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].nickname;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].sex;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].language;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].city;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].province;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].country;
-                            html += "</td>";
-                            html += "<td>";
-                            html += data[i].area;
-                            html += "</td>";
-                            html += "</tr>";
-                        }
-                        html += "</tbody>";
-                        html += "</table>";
-                        $('#userdiv').html(html);
-                        $('#selectArea').val(selectArea);
-                    },
-                    error: function (data) {
-                        console.log(data);
-                    }
-                })
-            });
-        });
-    </script>
+
+    <![endif]-->
 </head>
 
 <body>
@@ -156,10 +85,10 @@
                             <nav class="nav-primary hidden-xs">
                                 <ul class="nav">
                                     <li>
-                                        <a href="index.jsp" class="active"> <i class="fa fa-dashboard icon"> <b
+                                        <a href="index" class="active"> <i class="fa fa-dashboard icon"> <b
                                                 class="bg-danger"></b> </i> <span>微信后台</span> </a>
                                     </li>
-                                    <li class="active">
+                                    <li>
                                         <a href="#layout"> <i class="fa fa-columns icon"> <b class="bg-warning"></b>
                                         </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i
                                                 class="fa fa-angle-up text-active"></i> </span> <span>用户管理</span> </a>
@@ -169,11 +98,11 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="notZone"> <i class="fa fa-angle-right"></i> <span>未分区用户</span>
-                                                </a>
+                                                <a href="notZone" class="active"> <i class="fa fa-angle-right"></i>
+                                                    <span>未分区用户</span> </a>
                                             </li>
-                                            <li class="active">
-                                                <a href="aleadyZone" class="active"> <i class="fa fa-angle-right"></i>
+                                            <li>
+                                                <a href="aleadyZone"> <i class="fa fa-angle-right"></i>
                                                     <span>已分区用户</span> </a>
                                             </li>
                                         </ul>
@@ -191,22 +120,24 @@
                                                 <a href="weibo"> <i class="fa fa-angle-right"></i> <span>微博信息</span>
                                                 </a>
                                             </li>
+
                                         </ul>
                                     </li>
-                                    <li>
+                                    <li class="active">
                                         <a href="#pages"> <i class="fa fa-file-text icon"> <b class="bg-primary"></b>
                                         </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i
                                                 class="fa fa-angle-up text-active"></i> </span> <span>模板消息</span> </a>
                                         <ul class="nav lt">
-                                            <li>
-                                                <a href="weiboTemp"> <i class="fa fa-angle-right"></i>
-                                                    <span>模板审核</span> </a>
+                                            <li class="alive">
+                                                <a href="weiboTemp"> <i class="fa fa-angle-right"></i> <span>模板审核</span>
+                                                </a>
                                             </li>
-                                            <li>
+                                            <li class="alive">
                                                 <a href="aleadyCheck"> <i class="fa fa-angle-right"></i>
                                                     <span>已审核消息</span>
                                                 </a>
                                             </li>
+
                                         </ul>
                                     </li>
                                 </ul>
@@ -226,58 +157,62 @@
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
-                        </session>
                         <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                             <li>
-                                <i class="fa fa-home">用户管理</i>
+                                <i class="fa fa-home">模板消息</i>
                             </li>
                             <li class="active">
-                                <a href="aleadyZone">已分区用户</a>
+                                <a href="aleadyCheck">已审核消息</a>
                             </li>
                         </ul>
                         <div class="m-b-md">
-                            <h3 class="m-b-none">已经分区的所有用户信息</h3>
+                            <h3 class="m-b-none">已审核消息</h3>
                             <small>student wechat service</small>
                         </div>
                         <section class="panel panel-default">
                             <div class="row m-l-none m-r-none bg-light lter">
-                                <header class="panel-heading">已分区用户<i class="fa fa-info-sign text-muted"
+                                <header class="panel-heading">已审核消息<i class="fa fa-info-sign text-muted"
                                                                       data-toggle="tooltip" data-placement="bottom"
                                                                       data-title="ajax to load the data."></i></header>
                                 <div class="row">
                                     <div class="col-sm-5 m-b-xs">
-                                        <select id="selectArea" class="input-sm form-control input-s-sm inline">
-                                            <option value="all">All</option>
-                                            <option value="湖北">湖北</option>
-                                            <option value="湖南">湖南</option>
-                                            <option value="陕西">陕西</option>
-                                            <option value="云南">云南</option>
-                                            <option value="浙江">浙江</option>
-                                            <option value="江苏">江苏</option>
-                                            <option value="山东">山东</option>
-                                            <option value="山西">山西</option>
-                                            <option value="新疆">新疆</option>
-                                            <option value="黑龙江">黑龙江</option>
-                                            <option value="河北">河北</option>
-                                            <option value="河南">河南</option>
-                                            <option value="四川">四川</option>
-                                            <option value="云南">云南</option>
-                                            <option value="福建">福建</option>
-                                            <option value="西藏">西藏</option>
-                                            <option value="海南">海南</option>
-                                            <option value="广东">广东</option>
-                                            <option value="广西">广西</option>
-                                            <option value="内蒙古">内蒙古</option>
-                                            <option value="宁夏">宁夏</option>
-                                            <option value="上海">上海</option>
-                                            <option value="吉林">吉林</option>
-                                            <option value="安徽">安徽</option>
-                                            <option value="江西">江西</option>
-                                            <option value="贵州">贵州</option>
-                                            <option value="辽宁">辽宁</option>
-                                            <option value="青海">青海</option>
-                                        </select>
-                                        <button id="apply" class="btn btn-sm btn-default">Apply</button>
+                                        <% String action1 = path + "/selectCheck";%>
+                                        <form data-validate="parsley" method="post" action="<%=action1%>">
+                                            <select name="selectZone" id="selectZone"
+                                                    class="input-sm form-control input-s-sm inline">
+                                                <option value="all">All</option>
+                                                <option value="湖北">湖北</option>
+                                                <option value="湖南">湖南</option>
+                                                <option value="陕西">陕西</option>
+                                                <option value="云南">云南</option>
+                                                <option value="浙江">浙江</option>
+                                                <option value="江苏">江苏</option>
+                                                <option value="山东">山东</option>
+                                                <option value="山西">山西</option>
+                                                <option value="新疆">新疆</option>
+                                                <option value="黑龙江">黑龙江</option>
+                                                <option value="河北">河北</option>
+                                                <option value="河南">河南</option>
+                                                <option value="四川">四川</option>
+                                                <option value="云南">云南</option>
+                                                <option value="福建">福建</option>
+                                                <option value="西藏">西藏</option>
+                                                <option value="海南">海南</option>
+                                                <option value="广东">广东</option>
+                                                <option value="广西">广西</option>
+                                                <option value="内蒙古">内蒙古</option>
+                                                <option value="宁夏">宁夏</option>
+                                                <option value="上海">上海</option>
+                                                <option value="吉林">吉林</option>
+                                                <option value="安徽">安徽</option>
+                                                <option value="江西">江西</option>
+                                                <option value="贵州">贵州</option>
+                                                <option value="辽宁">辽宁</option>
+                                                <option value="青海">青海</option>
+                                            </select>
+                                            <button id="apply" type="submit" class="btn btn-sm btn-default">Apply
+                                            </button>
+                                        </form>
                                     </div>
                                     <div class="pull-right col-sm-3">
                                         <div class="input-group">
@@ -289,51 +224,29 @@
                                     </div>
                                 </div>
                                 <div id="userdiv" class="table-responsive">
-                                    <table id="userTable" class="table table-striped m-b-none" data-ride="datatables">
-                                        <thead>
-                                        <tr>
-                                            <th width="15%">openId</th>
-                                            <th width="15%">微信名</th>
-                                            <th width="5%">性别</th>
-                                            <th width="7%">语言</th>
-                                            <th width="7%">城市</th>
-                                            <th width="7%">省份</th>
-                                            <th width="7%">国家</th>
-                                            <th width="10%">分区区域</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="usertbody">
-                                        <c:forEach items="${userInfo}" var="userInfo" varStatus="i">
-                                            <tr>
-                                                <td id="openid${i.count}"
-                                                    value="${userInfo.openid}">${userInfo.openid}</td>
-                                                <td>${userInfo.nickname}</td>
-                                                <td>${userInfo.sex}</td>
-                                                <td>${userInfo.language}</td>
-                                                <td>${userInfo.city}</td>
-                                                <td>${userInfo.province}</td>
-                                                <td>${userInfo.country}</td>
-                                                <td>${userInfo.area}</td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
+                            <div style="margin-left:45px;margin-top:5px;font-size:medium; float:left;font-style: italic">
+                                一共有${counts}条数据
+                            </div>
+                            <div style="margin-left:35%">
+                                <ul class="pagination pagination-sm m-t-none m-b-none"
+                                    id="pagination">
+                                    <!--  <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>-->
+                                </ul>
+                            </div>
+                            <div>
+                                <input type="hidden" value="${pageSize}" id="pageSize"/>
+                                <input type="hidden" value="${counts}" id="counts"/>
+                                <input type="hidden" value="${zone}" id="zone"/>
+                            </div>
                         </section>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <section class="panel panel-default">
-
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel panel-default">
-
-                                </section>
-                            </div>
-                        </div>
-
                     </section>
                 </section>
                 <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
@@ -342,6 +255,8 @@
             <aside class="bg-light lter b-l aside-md hide" id="notes">
                 <div class="wrapper">Notification</div>
             </aside>
+
+
         </section>
     </section>
 </section>
@@ -358,6 +273,98 @@
 <script src="js/calendar/bootstrap_calendar.js" cache="false"></script>
 <script src="js/calendar/demo.js" cache="false"></script>
 <script src="js/sortable/jquery.sortable.js" cache="false"></script>
-</body>
-
-</html>
+<script src="js/jqPaginator.js" cache="false"></script>
+<script>
+    <%--<input type="hidden" value="${username}" id="username"/>--%>
+    <%--<input type="hidden" value="<%=request.getContextPath()%>" id="contextPath"/>--%>
+    //记录总页面和每页数
+    var ps = Number(document.getElementById("pageSize").value);
+    console.info(ps);
+    var tc = Number(document.getElementById("counts").value);
+    var datelength;
+    console.info(tc);
+    //分页
+    $('.pagination').jqPaginator({
+        totalCounts: tc,
+        pageSize: ps,
+        visiblePages: 5,
+        currentPage: 1,
+        first: '<li class="first"><a href="javascript:;">首页</a></li>',
+        last: '<li class="last"><a href="javascript:;">尾页</a></li>',
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            if ($("#orderpages_hidden").val() != 0) {
+                getPage(num);
+            }
+            //$('#p3').html('当前第' + num + '页');
+        }
+    });
+    //alert(document.getElementById("musicname").value);
+    //alert("${musicname}");
+    //获取每页的数据
+    function getPage(page, k) {
+        var ps = Number(document.getElementById("pageSize").value);
+        var tc = Number(document.getElementById("counts").value);
+        var zone = $("#zone").val();
+        //alert(tc);
+        //alert(sn);
+        $.ajax({
+            type: "POST",
+            url: "/wechatService/ajax_operation2",
+            dataType: "json",
+            cache: false,
+            data: {
+                pageIndex: page,
+                pageSize: ps,
+                totalPage: tc,
+                zone: zone
+            },
+            async: false,
+            error: function () {
+                alert("网络异常！");
+            },
+            success: function (data) {
+                var html = "";
+                html += "<table id='userTable' class='table table-striped m-b-none' data-ride='datatables'>";
+                html += "<thead>";
+                html += "<tr>";
+                html += "<th width='60%'>微博内容</th>";
+                html += "<th width='10%'>微博时间</th>";
+                html += "<th width='10%'>微博来源</th>";
+                html += "<th width='10'>热度</th>";
+//                html += "<th >提审</th>";
+                html += "</tr>";
+                html += "</thead>";
+                html += "<tbody>";
+                for (var i = 0; i < data.length; i++) {
+                    var redu;
+                    redu = data[i].zan + data[i].pinglun * 2 + data[i].zhuanfa * 3;
+                    html += "<tr>";
+                    html += "<td id='contentid" + i + "' hidden='hidden'>";
+                    html += data[i].contentid;
+                    html += "</td>";
+                    html += "<td>";
+                    html += data[i].content;
+                    html += "</td>";
+                    html += "<td>";
+                    html += data[i].time;
+                    html += "</td>";
+                    html += "<td>";
+                    html += data[i].weiboname;
+                    html += "</td>";
+                    html += "<td width='10%'>";
+                    html += redu;
+                    html += "</td>";
+                    html += "</tr>";
+                }
+                html += ' </tbody>';
+                html += '</table>';
+                $('#userdiv').html(html);
+            }
+        });
+    }
+    ;
+    $('#selectZone').val("${selectZone == null?'all': selectZone}");
+</script>

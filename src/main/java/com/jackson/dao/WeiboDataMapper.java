@@ -36,4 +36,9 @@ public interface WeiboDataMapper {
     WeiboData findByContentId(String contentid);
 
     List<WeiboData> findByZone(String zone);
+
+    List<WeiboData> findByIscheck(Boolean ischeck);
+
+    List<WeiboData> findByZoneAndIscheck(@Param(value = "zone") String zone, @Param(value = "ischeck") boolean ischeck);
+
 }

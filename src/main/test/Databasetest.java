@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
@@ -130,6 +132,18 @@ public class Databasetest {
     public void findByZone() throws Exception {
         String zone = "湖北";
         List<WeiboData> weiboDataList = wbDataService.findByZone(zone);
+        for (int i = 0; i < weiboDataList.size(); i++) {
+            System.out.println(weiboDataList.get(i).toString());
+        }
+    }
+
+    @Test
+    public void findByZoneAndIscheck() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("zone", "广西");
+        System.out.println(map.get("zone"));
+        map.put("ischeck", true);
+        List<WeiboData> weiboDataList = wbDataService.findByZoneAndIscheck("广西", true);
         for (int i = 0; i < weiboDataList.size(); i++) {
             System.out.println(weiboDataList.get(i).toString());
         }
